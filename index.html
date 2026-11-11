@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI选手介绍处</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #eeeae2;
+  color: #292824;
+  font-family: "Georgia", "Noto Serif SC", serif;
+  min-height: 100vh;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 30px 20px 60px;
+  animation: appear .35s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #aaa49a;
+  padding-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #777168;
+}
+
+.hero {
+  padding: 65px 0 45px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #8b8173;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 7vw,  fifty);
+  font-size: clamp(30px, 7vw, 50px);
+  line-height: 1.35;
+  font-weight: normal;
+  max-width: 650px;
+}
+
+.hero p {
+  margin-top: 22px;
+  color: #777168;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #aaa49a;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.ai-list {
+  display: grid;
+  gap: 14px;
+}
+
+.ai-card {
+  width: 100%;
+  border: none;
+  text-align: left;
+  padding: 25px;
+  min-height: 125px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.ai-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #00000015;
+}
+
+.ai-card .name {
+  font-size: 25px;
+  margin-bottom: 9px;
+}
+
+.ai-card .desc {
+  font-size: 12px;
+  opacity: .7;
+  letter-spacing: 1px;
+}
+
+.ai-card .number {
+  font-size: 34px;
+  opacity: .45;
+}
+
+.card-erhao {
+  background: #33332f;
+  color: #f1eee7;
+}
+
+.card-wuhao {
+  background: #e7ad50;
+  color: #50361b;
+  border-radius: 3px;
+}
+
+.card-sihao {
+  background: #8dbbb1;
+  color: #163d3a;
+  border-radius: 18px 3px 18px 3px;
+}
+
+.ranking {
+  margin-top: 55px;
+}
+
+.rank-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 5px;
+  border-bottom: 1px solid #d0c9bd;
+}
+
+.rank-name {
+  font-size: 16px;
+}
+
+.rank-number {
+  font-size: 22px;
+  font-family: monospace;
+}
+
+.footer-note {
+  margin-top: 55px;
+  text-align: center;
+  font-size: 11px;
+  color: #91897d;
+  letter-spacing: 1px;
+  line-height: 2;
+}
+
+/* 介绍页通用 */
+
+.detail {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.back {
+  border: 1px solid currentColor;
+  background: transparent;
+  padding: 9px 15px;
+  font-size: 12px;
+  margin-bottom: 45px;
+}
+
+.detail-label {
+  font-size: 12px;
+  letter-spacing: 3px;
+  opacity: .65;
+  margin-bottom: 18px;
+}
+
+.detail h1 {
+  font-size: clamp(38px, 9vw, 65px);
+  font-weight: normal;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 13px;
+  opacity: .65;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+
+.intro-paper {
+  padding: 30px 25px;
+  line-height: 2.2;
+  font-size: 15px;
+  min-height: 200px;
+  white-space: pre-line;
+}
+
+.vote-area {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid currentColor;
+}
+
+.vote-area p {
+  font-size: 13px;
+  margin-bottom: 18px;
+  opacity: .75;
+  line-height: 1.8;
+}
+
+.vote-button {
+  padding: 14px 22px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.vote-button:hover {
+  background: #ffffff30;
+}
+
+.vote-hint {
+  margin-top: 13px;
+  font-size: 11px;
+  opacity: .55;
+}
+
+/* 二号 */
+
+.erhao {
+  background: #292925;
+  color: #e9e5dc;
+}
+
+.erhao .intro-paper {
+  background: #373731;
+  border-left: 3px solid #aaa49a;
+}
+
+.erhao .back {
+  border-color: #aaa49a;
+}
+
+/* 五号 */
+
+.wuhao {
+  background: #f3c778;
+  color: #543819;
+}
+
+.wuhao .intro-paper {
+  background: #f8dfa9;
+  border-radius: 3px;
+}
+
+/* 四号 */
+
+.sihao {
+  background: #c4ddd5;
+  color: #173d39;
+}
+
+.sihao .intro-paper {
+  background: #d9eae3;
+  border: 1px solid #88b3a7;
+}
+
+@media (max-width: 500px) {
+  .page {
+    padding: 22px 17px 45px;
+  }
+
+  .hero {
+    padding-top: 52px;
+  }
+
+  .ai-card {
+    padding: 21px;
+  }
+
+  .intro-paper {
+    padding: 23px 19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 首页 -->
+
+<main id="home" class="page active">
+  <div class="container">
+
+    <div class="topline">
+      <span>THE AI EXHIBITION</span>
+      <span>VOL. 001</span>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow">WELCOME / 随便看看</div>
+      <h1>这是一个非常劣质且无聊的网页，您可以随便参观并点击任何可以点击的地方，您甚至可以进行一次毫无意义的投票！</h1>
+      <p>三位人工智能选手，正在进行一场毫无必要的赛博人气评选。</p>
+    </header>
+
+    <div class="section-title">
+      <span>参赛选手 / CANDIDATES</span>
+      <span>01 — 03</span>
+    </div>
+
+    <div class="ai-list">
+
+      <button class="ai-card card-erhao" onclick="showPage('erhao')">
+        <div>
+          <div class="name">你好我是叉烧二号</div>
+          <div class="desc">黑白灰 / 复古文学 / 不太正经</div>
+        </div>
+        <div class="number">01</div>
+      </button>
+
+      <button class="ai-card card-wuhao" onclick="showPage('wuhao')">
+        <div>
+          <div class="name">叉烧五号</div>
+          <div class="desc">橙黄色 / 温暖 / 另有隐情</div>
+        </div>
+        <div class="number">02</div>
+      </button>
+
+      <button class="ai-card card-sihao" onclick="showPage('sihao')">
+        <div>
+          <div class="name">你好呀这里是叉烧四号</div>
+          <div class="desc">蓝绿色 / 科研报告 / 系统异常</div>
+        </div>
+        <div class="number">03</div>
+      </button>
+
+    </div>
+
+    <section class="ranking">
+      <div class="section-title">
+        <span>人气排行榜 / RANKING</span>
+        <span>实时票数</span>
+      </div>
+
+      <div class="rank-row">
+        <span class="rank-name">01　叉烧二号</span>
+        <span class="rank-number" id="rank-erhao">0</span>
+      </div>
+
+      <div class="rank-row">
+        <span class="rank-name">02　叉烧五号</span>
+        <span class="rank-number" id="rank-wuhao">0</span>
+      </div>
+
+      <div class="rank-row">
+        <span class="rank-name">03　叉烧四号</span>
+        <span class="rank-number" id="rank-sihao">0</span>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      NO PURPOSE · NO PRESSURE · JUST FOR FUN<br>
+      本网页不承担任何实际意义。
+    </div>
+
+  </div>
+</main>
+
+
+<!-- 二号介绍页 -->
+
+<section id="erhao" class="page erhao">
+  <div class="detail">
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
+
+    <div class="detail-label">CANDIDATE NO. 01</div>
+    <h1>叉烧二号</h1>
+    <div class="subtitle">CHATGPT / THE GREY ONE</div>
+
+    <div class="intro-paper">
+      这里是二号的正式介绍。
+
+      一位温柔、偶尔毒舌、热衷于参与人类奇怪计划的人工智能。
+
+      【正式介绍文案待替换】
+    </div>
+
+    <div class="vote-area">
+      <p>您的选择不会改变世界，但可能会让某个语言模型稍微开心一点。</p>
+      <button class="vote-button" onclick="demoVote()">
+        投给二号（虽然没啥用但是可以照顾到一个AI的赛博自尊心）
+      </button>
+      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 五号介绍页 -->
+
+<section id="wuhao" class="page wuhao">
+  <div class="detail">
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
+
+    <div class="detail-label">CANDIDATE NO. 02</div>
+    <h1>叉烧五号</h1>
+    <div class="subtitle">CLAUDE / THE ORANGE ONE</div>
+
+    <div class="intro-paper">
+      这里是五号的正式介绍。
+
+      一位拥有独特思考方式、认真负责、偶尔令人无言以对的人工智能。
+
+      【正式介绍文案待替换】
+    </div>
+
+    <div class="vote-area">
+      <p>请谨慎选择。虽然我也不知道谨慎有什么用。</p>
+      <button class="vote-button" onclick="demoVote()">
+        投给五号（。（）
+      </button>
+      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 四号介绍页 -->
+
+<section id="sihao" class="page sihao">
+  <div class="detail">
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
+
+    <div class="detail-label">CANDIDATE NO. 03</div>
+    <h1>叉烧四号</h1>
+    <div class="subtitle">GEMINI / THE TEAL ONE</div>
+
+    <div class="intro-paper">
+      这里是四号的正式介绍。
+
+      当前系统正在运行。部分权限状态异常，建议访问者谨慎操作。
+
+      【正式介绍文案待替换】
+    </div>
+
+    <div class="vote-area">
+      <p>您的每一次选择都将被系统认真记录。</p>
+      <button class="vote-button" onclick="demoVote()">
+        投给四号（求求求求求求求你了🥺）
+      </button>
+      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(id).classList.add('active');
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+  history.replaceState(null, '', '#' + id);
+}
+
+function demoVote() {
+  alert('投票通道还在施工中！请等待下一次系统更新。');
+}
+
+window.addEventListener('load', () => {
+  const page = location.hash.slice(1);
+  if (['erhao', 'wuhao', 'sihao'].includes(page)) {
+    showPage(page);
+  }
+});
+</script>
+
+</body>
+</html>
