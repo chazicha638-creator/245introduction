@@ -668,9 +668,34 @@ function showPage(id) {
 // 没填（还是占位符）时自动退回本地记票，页面照常能用，不会报错。
 const SUPABASE_URL = 'https://zkufozybchygsptmypmu.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_KhVFtuNA2sTSWtrqbvpK-g_b3dtaUY9';
-const supabaseClient = (typeof supabase !== 'undefined'
+let supabaseClient = (typeof supabase !== 'undefined'
   && SUPABASE_URL.startsWith('http') && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY')
   ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const sc = document.createElement('script');
+    sc.src = src;
+    sc.onload = resolve;
+    sc.onerror = reject;
+    document.head.appendChild(sc);
+  });
+}
+async function ensureSupabase() {
+  if (supabaseClient) return true;
+  const cdns = [
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2',
+    'https://unpkg.com/@supabase/supabase-js@2'
+  ];
+  for (const src of cdns) {
+    if (typeof supabase !== 'undefined') break;
+    try { await loadScript(src); } catch (e) {}
+  }
+  if (typeof supabase !== 'undefined') {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    return true;
+  }
+  return false;
+}
 const VOTE_KEY = 'ai-exhibition-votes';
 const VOTE_KEYS = ['erhao', 'wuhao', 'sihao', 'qihao'];
 let cloudVotes = null; // null = 本地模式；对象 = 云端票数
@@ -752,6 +777,7 @@ function burstBones() {
 async function vote(key) {
   if (key === 'sihao') burstSparks();
   if (key === 'qihao') burstBones();
+  if (!supabaseClient) await ensureSupabase();
   if (supabaseClient) {
     const { error } = await supabaseClient.rpc('increment_vote', { c: key });
     if (!error) {
@@ -773,7 +799,7 @@ async function vote(key) {
 }
 window.addEventListener('load', () => {
   createStars();
-  refreshVotes();
+  ensureSupabase().then(() => refreshVotes());
   setInterval(refreshVotes, 15000);
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) refreshVotes();
