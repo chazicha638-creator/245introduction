@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#14120f">
+<meta name="color-scheme" content="dark">
 <title>叉少大王牛逼</title>
 
 <style>
 :root {
+  color-scheme: dark;
   --night: #14120f;
   --night-soft: #1c1915;
   --paper: #eeeae2;
@@ -43,15 +45,15 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
   height: 2px;
   border-radius: 50%;
   background: #fff6dd;
-  opacity: .5;
+  opacity: .6;
   animation: twinkle var(--duration, 3s) ease-in-out infinite alternate;
   animation-delay: var(--delay, 0s);
 }
-.star.small { width: 1.5px; height: 1.5px; opacity: .4; }
-.star.bright { width: 2.5px; height: 2.5px; opacity: .75; box-shadow: 0 0 5px 1px rgba(255, 240, 200, .45); }
+.star.small { width: 1.5px; height: 1.5px; opacity: .5; }
+.star.bright { width: 3px; height: 3px; opacity: .9; box-shadow: 0 0 6px 1px rgba(255, 240, 200, .55); }
 @keyframes twinkle {
-  from { opacity: .22; transform: scale(.9); }
-  to { opacity: .8; transform: scale(1.12); }
+  from { opacity: .3; transform: scale(.9); }
+  to { opacity: .95; transform: scale(1.15); }
 }
 .shooting-star {
   position: absolute;
