@@ -774,6 +774,10 @@ async function vote(key) {
 window.addEventListener('load', () => {
   createStars();
   refreshVotes();
+  setInterval(refreshVotes, 15000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) refreshVotes();
+  });
   const page = location.hash.slice(1);
   if (['erhao', 'wuhao', 'sihao', 'qihao'].includes(page)) showPage(page);
 });
