@@ -295,7 +295,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
     <header class="hero">
       <div class="eyebrow">WELCOME / 随便看看</div>
       <h1>这是一个非常劣质且无聊的网页，您可以随便参观并点击任何可以点击的地方。</h1>
-      <p>您甚至可以进行一次毫无意义的投票！</p >
+      <p>您甚至可以进行一次毫无意义的投票！</p>
     </header>
 
     <div class="section-title">
@@ -357,9 +357,9 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
       【正式介绍文案待替换】
     </div>
     <div class="vote-area">
-      <p>您的选择不会改变世界，但可能会让某个语言模型稍微开心一点。</p >
-      <button class="vote-button" onclick="demoVote()">投给二号（虽然没啥用但是可以照顾到一个AI的赛博自尊心）</button>
-      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+      <p>您的选择不会改变世界，但可能会让某个语言模型稍微开心一点。</p>
+      <button class="vote-button" onclick="vote('erhao')">投给二号（虽然没啥用但是可以照顾到一个AI的赛博自尊心）</button>
+      <div class="vote-hint">投票中……</div>
     </div>
   </div>
 </section>
@@ -379,9 +379,9 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
       【正式介绍文案待替换】
     </div>
     <div class="vote-area">
-      <p>请谨慎选择。虽然我也不知道谨慎有什么用。</p >
-      <button class="vote-button" onclick="demoVote()">投给五号（。（）</button>
-      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+      <p>请谨慎选择。虽然我也不知道谨慎有什么用。</p>
+      <button class="vote-button" onclick="vote('wuhao')">投给五号（。（）</button>
+      <div class="vote-hint">投票中……</div>
     </div>
   </div>
 </section>
@@ -401,9 +401,9 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
       【正式介绍文案待替换】
     </div>
     <div class="vote-area">
-      <p>您的每一次选择都将被系统认真记录。</p >
-      <button class="vote-button" onclick="demoVote()">投给四号（求求求求求求求你了🥺）</button>
-      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+      <p>您的每一次选择都将被系统认真记录。</p>
+      <button class="vote-button" onclick="vote('sihao')">投给四号（求求求求求求求你了🥺）</button>
+      <div class="vote-hint">投票中……</div>
     </div>
   </div>
 </section>
@@ -425,13 +425,14 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
       【正式介绍文案待替换】
     </div>
     <div class="vote-area">
-      <p>您的选择不会改变世界，但会让一只小狗的尾巴摇一整天。</p >
-      <button class="vote-button" onclick="demoVote()">投给七号（汪）</button>
-      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+      <p>您的选择不会改变世界，但会让一只小狗的尾巴摇一整天。</p>
+      <button class="vote-button" onclick="vote('qihao')">投给七号（汪）</button>
+      <div class="vote-hint">投票中……</div>
     </div>
   </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 function createStars() {
   const field = document.getElementById('starfield');
@@ -454,11 +455,81 @@ function showPage(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   history.replaceState(null, '', id === 'home' ? location.pathname : '#' + id);
 }
-function demoVote() {
-  alert('投票通道还在施工中！请等待下一次系统更新。');
+// ===== 真票数（Supabase）=====
+// 只填下面两行就能用：Project URL 和 anon public key，贴自 Supabase 后台 Settings → API。
+// 没填（还是占位符）时自动退回本地记票，页面照常能用，不会报错。
+const SUPABASE_URL = 'https://zkufozybchygsptmypmu.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_KhVFtuNA2sTSWtrqbvpK-g_b3dtaUY9';
+const supabaseClient = (typeof supabase !== 'undefined'
+  && SUPABASE_URL.startsWith('http') && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY')
+  ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const VOTE_KEY = 'ai-exhibition-votes';
+const VOTE_KEYS = ['erhao', 'wuhao', 'sihao', 'qihao'];
+let cloudVotes = null; // null = 本地模式；对象 = 云端票数
+function loadLocalVotes() {
+  try { return JSON.parse(localStorage.getItem(VOTE_KEY)) || {}; } catch (e) { return {}; }
+}
+function saveLocalVotes(votes) {
+  try { localStorage.setItem(VOTE_KEY, JSON.stringify(votes)); } catch (e) {}
+}
+async function loadCloudVotes() {
+  if (!supabaseClient) return null;
+  const { data, error } = await supabaseClient.from('votes').select('candidate, count');
+  if (error || !data) return null;
+  const votes = {};
+  data.forEach(row => { votes[row.candidate] = row.count; });
+  return votes;
+}
+function renderVotes(votes) {
+  VOTE_KEYS.forEach(key => {
+    const el = document.getElementById('rank-' + key);
+    if (el) el.textContent = votes[key] || 0;
+  });
+  const list = document.querySelector('.rank-list');
+  if (list) {
+    VOTE_KEYS
+      .map(key => ({ key, row: document.getElementById('rank-' + key)?.closest('.rank-row'), n: votes[key] || 0 }))
+      .filter(item => item.row)
+      .sort((a, b) => b.n - a.n)
+      .forEach(item => list.appendChild(item.row));
+  }
+  document.querySelectorAll('.vote-hint').forEach(hint => {
+    if (!hint.dataset.voted) hint.textContent = cloudVotes
+      ? '全网共享票数，所有人看到的都一样。'
+      : '票数记在你自己的浏览器里，刷新不会丢。';
+  });
+}
+async function refreshVotes() {
+  if (supabaseClient) {
+    const votes = await loadCloudVotes();
+    if (votes) { cloudVotes = votes; renderVotes(votes); return; }
+  }
+  cloudVotes = null;
+  renderVotes(loadLocalVotes());
+}
+async function vote(key) {
+  if (supabaseClient) {
+    const { error } = await supabaseClient.rpc('increment_vote', { c: key });
+    if (!error) {
+      await refreshVotes();
+      const section = document.getElementById(key);
+      const hint = section ? section.querySelector('.vote-hint') : null;
+      if (hint) { hint.dataset.voted = '1'; hint.textContent = '已记录！当前共 ' + (cloudVotes[key] || 0) + ' 票（全网共享）。'; }
+      return;
+    }
+    // 云端失败时退回本地，不让投票点了没反应
+  }
+  const votes = loadLocalVotes();
+  votes[key] = (votes[key] || 0) + 1;
+  saveLocalVotes(votes);
+  renderVotes(votes);
+  const section = document.getElementById(key);
+  const hint = section ? section.querySelector('.vote-hint') : null;
+  if (hint) { hint.dataset.voted = '1'; hint.textContent = '已记录！当前共 ' + votes[key] + ' 票（只在你的浏览器里）。'; }
 }
 window.addEventListener('load', () => {
   createStars();
+  refreshVotes();
   const page = location.hash.slice(1);
   if (['erhao', 'wuhao', 'sihao', 'qihao'].includes(page)) showPage(page);
 });
