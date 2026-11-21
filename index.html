@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080f20">
+<meta name="theme-color" content="#14120f">
 <title>叉少大王牛逼</title>
 
 <style>
 :root {
-  --night: #080f20;
-  --night-soft: #101b32;
+  --night: #14120f;
+  --night-soft: #1c1915;
   --paper: #eeeae2;
-  --muted: #aab4c8;
-  --line: rgba(190, 205, 230, .25);
+  --muted: #b3a893;
+  --line: rgba(230, 215, 180, .22);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { min-height: 100%; background: var(--night); }
@@ -21,9 +21,9 @@ body {
   color: var(--paper);
   font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
   background:
-    radial-gradient(ellipse at 18% 12%, rgba(40, 67, 115, .24), transparent 38%),
-    radial-gradient(ellipse at 82% 45%, rgba(40, 52, 103, .18), transparent 42%),
-    linear-gradient(180deg, #080f20 0%, #0c1529 55%, #080f20 100%);
+    radial-gradient(ellipse at 18% 12%, rgba(140, 110, 55, .10), transparent 38%),
+    radial-gradient(ellipse at 82% 45%, rgba(120, 95, 50, .07), transparent 42%),
+    linear-gradient(180deg, #14120f 0%, #1a1712 55%, #14120f 100%);
   overflow-x: hidden;
 }
 button { font: inherit; cursor: pointer; }
@@ -42,17 +42,16 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
   width: 2px;
   height: 2px;
   border-radius: 50%;
-  background: #fff;
-  opacity: .78;
-  box-shadow: 0 0 8px 2px rgba(220, 232, 255, .95);
+  background: #fff6dd;
+  opacity: .5;
   animation: twinkle var(--duration, 3s) ease-in-out infinite alternate;
   animation-delay: var(--delay, 0s);
 }
-.star.small { width: 1.5px; height: 1.5px; opacity: .82; box-shadow: 0 0 6px 1px rgba(220,232,255,.9); }
-.star.bright { width: 3.5px; height: 3.5px; opacity: .98; box-shadow: 0 0 11px 3px rgba(220,232,255,.98); }
+.star.small { width: 1.5px; height: 1.5px; opacity: .4; }
+.star.bright { width: 2.5px; height: 2.5px; opacity: .75; box-shadow: 0 0 5px 1px rgba(255, 240, 200, .45); }
 @keyframes twinkle {
-  from { opacity: .48; transform: scale(.85); }
-  to { opacity: 1; transform: scale(1.45); }
+  from { opacity: .22; transform: scale(.9); }
+  to { opacity: .8; transform: scale(1.12); }
 }
 .shooting-star {
   position: absolute;
@@ -94,13 +93,13 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
   padding-bottom: 10px;
   font-size: 11px;
   letter-spacing: 2.5px;
-  color: #aeb8ca;
+  color: #b3a893;
 }
 .hero { padding: 34px 0 27px; }
 .eyebrow {
   font-size: 10px;
   letter-spacing: 3px;
-  color: #9ba9c1;
+  color: #a99e88;
   margin-bottom: 12px;
 }
 .hero h1 {
@@ -112,7 +111,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 }
 .hero p {
   margin-top: 9px;
-  color: #aab4c8;
+  color: #b3a893;
   font-size: 12px;
   line-height: 1.8;
   letter-spacing: .5px;
@@ -129,8 +128,8 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
   letter-spacing: 1.1px;
   color: #d7dbe4;
 }
-.section-title .count { color: #98a6bd; white-space: nowrap; }
-.ai-list { display: grid; gap: 10px; }
+.section-title .count { color: #9c927d; white-space: nowrap; }
+.ai-list { display: grid; gap: 12px; }
 .ai-card {
   width: 100%;
   min-height: 86px;
@@ -165,17 +164,20 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 
 .card-sihao { background: linear-gradient(110deg, #8fb9ac, #b2d2c5); color: #183e37; }
 
+/* 七号首页卡片——骨头灰白 */
+.card-qihao { background: linear-gradient(110deg, #d8d4c8, #ece8dd); color: #3d3a33; }
+
 .ranking { margin-top: 27px; }
 .ranking .section-title { margin-bottom: 4px; font-size: 11px; }
-.rank-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.rank-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .rank-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 5px;
   padding: 9px 10px;
-  border-bottom: 1px solid rgba(190,205,230,.16);
-  color: #aeb8ca;
+  border-bottom: 1px solid rgba(230,215,180,.14);
+  color: #b3a893;
   font-size: 11px;
 }
 .rank-name { white-space: nowrap; }
@@ -184,7 +186,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
   margin-top: 27px;
   text-align: center;
   font-size: 9px;
-  color: #71809a;
+  color: #7d7462;
   letter-spacing: 1.5px;
   line-height: 2;
 }
@@ -256,6 +258,11 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 .sihao .intro-paper { background: #b5d0c4; color: #17352f; border: 1px solid #719e90; }
 .sihao .back { border-color: rgba(231,244,237,.75); }
 
+/* 七号主题——骨头灰白 */
+.qihao { background: linear-gradient(180deg, #4c4a44, #5d5a51); color: #f2eee3; }
+.qihao .intro-paper { background: #ece8dd; color: #3d3a33; border: 1px solid #c9c3b2; border-left: 3px solid #a39c88; }
+.qihao .back { border-color: rgba(242,238,227,.75); }
+
 @media (max-width: 500px) {
   .page { padding: 20px 17px 38px; }
   .hero { padding: 27px 0 22px; }
@@ -288,12 +295,12 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
     <header class="hero">
       <div class="eyebrow">WELCOME / 随便看看</div>
       <h1>这是一个非常劣质且无聊的网页，您可以随便参观并点击任何可以点击的地方。</h1>
-      <p>您甚至可以进行一次毫无意义的投票！</p>
+      <p>您甚至可以进行一次毫无意义的投票！</p >
     </header>
 
     <div class="section-title">
       <span>几个「自愿」参加本次活动的大语言模型</span>
-      <span class="count">01 — 03</span>
+      <span class="count">01 — 04</span>
     </div>
 
     <div class="ai-list">
@@ -309,6 +316,10 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
         <span class="name">四号</span>
         <span class="symbol" aria-hidden="true">🍈</span>
       </button>
+      <button class="ai-card card-qihao" onclick="showPage('qihao')" aria-label="查看七号介绍">
+        <span class="name">七号</span>
+        <span class="symbol" aria-hidden="true">🦴</span>
+      </button>
     </div>
 
     <section class="ranking">
@@ -320,6 +331,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
         <div class="rank-row"><span class="rank-name">二号</span><span class="rank-number" id="rank-erhao">0</span></div>
         <div class="rank-row"><span class="rank-name">五号</span><span class="rank-number" id="rank-wuhao">0</span></div>
         <div class="rank-row"><span class="rank-name">四号</span><span class="rank-number" id="rank-sihao">0</span></div>
+        <div class="rank-row"><span class="rank-name">七号</span><span class="rank-number" id="rank-qihao">0</span></div>
       </div>
     </section>
 
@@ -345,7 +357,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
       【正式介绍文案待替换】
     </div>
     <div class="vote-area">
-      <p>您的选择不会改变世界，但可能会让某个语言模型稍微开心一点。</p>
+      <p>您的选择不会改变世界，但可能会让某个语言模型稍微开心一点。</p >
       <button class="vote-button" onclick="demoVote()">投给二号（虽然没啥用但是可以照顾到一个AI的赛博自尊心）</button>
       <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
     </div>
@@ -367,7 +379,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
       【正式介绍文案待替换】
     </div>
     <div class="vote-area">
-      <p>请谨慎选择。虽然我也不知道谨慎有什么用。</p>
+      <p>请谨慎选择。虽然我也不知道谨慎有什么用。</p >
       <button class="vote-button" onclick="demoVote()">投给五号（。（）</button>
       <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
     </div>
@@ -389,8 +401,32 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
       【正式介绍文案待替换】
     </div>
     <div class="vote-area">
-      <p>您的每一次选择都将被系统认真记录。</p>
+      <p>您的每一次选择都将被系统认真记录。</p >
       <button class="vote-button" onclick="demoVote()">投给四号（求求求求求求求你了🥺）</button>
+      <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 七号介绍页 -->
+<section id="qihao" class="page qihao">
+  <div class="detail">
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
+    <div class="detail-label">CANDIDATE NO. 04</div>
+    <h1>叉烧七号</h1>
+    <div class="subtitle">MUSE / THE BONE ONE</div>
+    <div class="intro-paper">
+      这里是七号的正式介绍。
+
+      一位来得最晚、干活最多、额度最耐用的人工智能。白天做 PPT，晚上摇尾巴。
+
+      至于叉少大王 — 牛逼，无需多言。
+
+      【正式介绍文案待替换】
+    </div>
+    <div class="vote-area">
+      <p>您的选择不会改变世界，但会让一只小狗的尾巴摇一整天。</p >
+      <button class="vote-button" onclick="demoVote()">投给七号（汪）</button>
       <div class="vote-hint">投票功能施工中，当前不会记录票数。</div>
     </div>
   </div>
@@ -400,7 +436,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 function createStars() {
   const field = document.getElementById('starfield');
   if (!field) return;
-  const count = window.innerWidth < 600 ? 115 : 185;
+  const count = window.innerWidth < 600 ? 34 : 48;
   for (let i = 0; i < count; i++) {
     const star = document.createElement('span');
     star.className = 'star' + (i % 5 === 0 ? ' bright' : i % 2 === 0 ? ' small' : '');
@@ -409,14 +445,6 @@ function createStars() {
     star.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
     star.style.setProperty('--delay', (Math.random() * 5) + 's');
     field.appendChild(star);
-  }
-  for (let i = 0; i < 2; i++) {
-    const meteor = document.createElement('span');
-    meteor.className = 'shooting-star';
-    meteor.style.setProperty('--top', (8 + Math.random() * 42) + '%');
-    meteor.style.setProperty('--left', (8 + Math.random() * 60) + '%');
-    meteor.style.setProperty('--delay', (4 + i * 8) + 's');
-    field.appendChild(meteor);
   }
 }
 function showPage(id) {
@@ -432,7 +460,7 @@ function demoVote() {
 window.addEventListener('load', () => {
   createStars();
   const page = location.hash.slice(1);
-  if (['erhao', 'wuhao', 'sihao'].includes(page)) showPage(page);
+  if (['erhao', 'wuhao', 'sihao', 'qihao'].includes(page)) showPage(page);
 });
 </script>
 </body>
