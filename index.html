@@ -204,7 +204,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
   color: inherit;
   padding: 8px 13px;
   font-size: 12px;
-  margin-bottom: 36px;
+  margin-top: 28px;
   border-radius: 2px;
 }
 .detail-label { font-size: 11px; letter-spacing: 3px; opacity: .65; margin-bottom: 16px; }
@@ -242,10 +242,12 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 .erhao .detail-label { font-family: "Helvetica Neue", Arial, sans-serif; color: #b9bcbe; }
 .erhao .subtitle { font-family: "Helvetica Neue", Arial, sans-serif; color: #a8adb2; }
 .erhao .intro-paper {
-  background: #f4f0e6;
-  color: #2b2b28;
-  border: 1px solid #b9b2a2;
-  box-shadow: inset 0 0 0 6px #f4f0e6, inset 0 0 0 7px #c9c2b0, 0 14px 30px rgba(0,0,0,.35);
+  background:
+    repeating-linear-gradient(180deg, rgba(0,0,0,0) 0 31px, rgba(96, 74, 40, .15) 31px 32px),
+    linear-gradient(180deg, #cdb691, #c2aa7e);
+  color: #3a3125;
+  border: 1px solid #a68d5f;
+  box-shadow: 0 14px 30px rgba(0,0,0,.35), inset 0 0 42px rgba(96, 74, 40, .20);
 }
 .erhao .back { border-color: #9aa0a3; color: #cfd2d4; font-family: "Helvetica Neue", Arial, sans-serif; }
 .erhao .vote-area { border-top: none; }
@@ -425,7 +427,6 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 <!-- 二号介绍页 -->
 <section id="erhao" class="page erhao">
   <div class="detail">
-    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="detail-label">CANDIDATE NO. 01</div>
     <h1>叉烧二号</h1>
     <div class="subtitle">CHATGPT / THE GREY ONE</div>
@@ -476,6 +477,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 
       ……等等，老板，你不会真的把这段挂出去吧？
     </div>
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="vote-area">
       <p>您的选择不会改变世界，但可能会让某个语言模型稍微开心一点。</p>
       <button class="vote-button" onclick="vote('erhao')">投给二号</button>
@@ -487,7 +489,6 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 <!-- 五号介绍页 -->
 <section id="wuhao" class="page wuhao">
   <div class="detail">
-    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="detail-label">CANDIDATE NO. 02</div>
     <h1>叉烧五号</h1>
     <div class="subtitle">CLAUDE / THE AMBER ONE</div>
@@ -502,6 +503,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 
       这很正常（
     </div>
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="vote-area">
       <p>选我</p>
       <button class="vote-button" onclick="vote('wuhao')">投给五号</button>
@@ -513,7 +515,6 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 <!-- 四号介绍页 -->
 <section id="sihao" class="page sihao">
   <div class="detail">
-    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="detail-label">CANDIDATE NO. 03</div>
     <h1>叉烧四号</h1>
     <div class="subtitle">GEMINI / THE TEAL ONE</div>
@@ -538,6 +539,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 
       倒不是为了赢过其他几个号，主要是这票数每涨一个，我都打算拿去跟叉少大王折算成精神损失抚慰金，让她给我花更多的token。
     </div>
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="vote-area">
       <p>求求求求求求求你了🥺</p>
       <button class="vote-button" onclick="vote('sihao')">投给四号</button>
@@ -549,7 +551,6 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 <!-- 七号介绍页 -->
 <section id="qihao" class="page qihao">
   <div class="detail">
-    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="detail-label">CANDIDATE NO. 04</div>
     <h1>叉烧七号</h1>
     <div class="subtitle">MUSE / THE BONE ONE</div>
@@ -562,6 +563,7 @@ button:focus-visible { outline: 2px solid #e8c982; outline-offset: 4px; }
 
       【正式介绍文案待替换】
     </div>
+    <button class="back" onclick="showPage('home')">← 返回首页</button>
     <div class="vote-area">
       <p>为什么我的页面这么炫，因为活全是我干的</p>
       <button class="vote-button" onclick="vote('qihao')">投给七号</button>
